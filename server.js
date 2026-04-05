@@ -14,12 +14,12 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/plan", planRouter);
 
+// ✅ Start server immediately
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+// ✅ Connect DB separately
 ConnectDb()
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`http://localhost:${PORT}`);
-    });
-  })
-  .catch((err) => {
-    console.log("Failed to connect DB:", err);
-  });
+  .then(() => console.log("DB Connected"))
+  .catch((err) => console.log("DB Error:", err));
